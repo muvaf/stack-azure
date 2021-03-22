@@ -27,7 +27,7 @@ import (
 type AddressSpace struct {
 	// AddressPrefixes - A list of address blocks reserved for this virtual
 	// network in CIDR notation.
-	AddressPrefixes []string `json:"addressPrefixes"`
+	AddressPrefixes *[]string `json:"addressPrefixes"`
 }
 
 // VirtualNetworkPropertiesFormat defines properties of a VirtualNetwork.
@@ -35,21 +35,22 @@ type VirtualNetworkPropertiesFormat struct {
 	// AddressSpace - The AddressSpace that contains an array of IP address
 	// ranges that can be used by subnets.
 	// +optional
-	AddressSpace AddressSpace `json:"addressSpace"`
+	AddressSpace *AddressSpace `json:"addressSpace"`
 
 	// EnableDDOSProtection - Indicates if DDoS protection is enabled for all
 	// the protected resources in the virtual network. It requires a DDoS
 	// protection plan associated with the resource.
 	// +optional
-	EnableDDOSProtection bool `json:"enableDdosProtection,omitempty"`
+	EnableDDOSProtection *bool `json:"enableDdosProtection,omitempty"`
 
 	// EnableVMProtection - Indicates if VM protection is enabled for all the
 	// subnets in the virtual network.
 	// +optional
-	EnableVMProtection bool `json:"enableVmProtection,omitempty"`
+	EnableVMProtection *bool `json:"enableVmProtection,omitempty"`
 }
 
 // A VirtualNetworkSpec defines the desired state of a VirtualNetwork.
+// +typewriter:types:aggregated=github.com/Azure/azure-sdk-for-go/services/network/mgmt/2019-06-01/network.VirtualNetwork
 type VirtualNetworkSpec struct {
 	xpv1.ResourceSpec `json:",inline"`
 
@@ -65,14 +66,14 @@ type VirtualNetworkSpec struct {
 	ResourceGroupNameSelector *xpv1.Selector `json:"resourceGroupNameSelector,omitempty"`
 
 	// VirtualNetworkPropertiesFormat - Properties of the virtual network.
-	VirtualNetworkPropertiesFormat `json:"properties"`
+	*VirtualNetworkPropertiesFormat `json:"properties"`
 
 	// Location - Resource location.
-	Location string `json:"location"`
+	Location *string `json:"location"`
 
 	// Tags - Resource tags.
 	// +optional
-	Tags map[string]string `json:"tags,omitempty"`
+	Tags map[string]*string `json:"tags,omitempty"`
 }
 
 // A VirtualNetworkStatus represents the observed state of a VirtualNetwork.

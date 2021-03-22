@@ -1,6 +1,6 @@
 module github.com/crossplane/provider-azure
 
-go 1.13
+go 1.16
 
 require (
 	github.com/Azure/azure-pipeline-go v0.2.2 // indirect
@@ -29,5 +29,5 @@ require (
 	k8s.io/apimachinery v0.20.1
 	k8s.io/client-go v0.20.1
 	sigs.k8s.io/controller-runtime v0.8.0
-	sigs.k8s.io/controller-tools v0.3.0
+	sigs.k8s.io/controller-tools v0.4.0
 )

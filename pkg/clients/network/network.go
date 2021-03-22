@@ -28,13 +28,12 @@ import (
 // NewVirtualNetworkParameters returns an Azure VirtualNetwork object from a virtual network spec
 func NewVirtualNetworkParameters(v *v1alpha3.VirtualNetwork) networkmgmt.VirtualNetwork {
 	return networkmgmt.VirtualNetwork{
-		Location: azure.ToStringPtr(v.Spec.Location),
-		Tags:     azure.ToStringPtrMap(v.Spec.Tags),
+		Location: v.Spec.Location,
 		VirtualNetworkPropertiesFormat: &networkmgmt.VirtualNetworkPropertiesFormat{
-			EnableDdosProtection: azure.ToBoolPtr(v.Spec.VirtualNetworkPropertiesFormat.EnableDDOSProtection, azure.FieldRequired),
-			EnableVMProtection:   azure.ToBoolPtr(v.Spec.VirtualNetworkPropertiesFormat.EnableVMProtection, azure.FieldRequired),
+			EnableDdosProtection: v.Spec.VirtualNetworkPropertiesFormat.EnableDDOSProtection,
+			EnableVMProtection:   v.Spec.VirtualNetworkPropertiesFormat.EnableVMProtection,
 			AddressSpace: &networkmgmt.AddressSpace{
-				AddressPrefixes: &v.Spec.VirtualNetworkPropertiesFormat.AddressSpace.AddressPrefixes,
+				AddressPrefixes: v.Spec.VirtualNetworkPropertiesFormat.AddressSpace.AddressPrefixes,
 			},
 		},
 	}
